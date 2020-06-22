@@ -88,12 +88,18 @@ export default class ProductsProvider extends Component {
 
     if (category !== 'all')
       tempProducts = tempProducts.filter((el) => el.category === category);
+     let tesProd = [];
     if (search.length > 0) {
       tempProducts = tempProducts.filter((item) => {
-        let tempSearch = search.toLowerCase();
-        let tempTitle = item.title.toLowerCase();
-        if (tempTitle.includes(tempSearch)) return item;
+        let tempSearch = search.toLowerCase().trim();
+        let tempTitle = item.title.toLowerCase().trim();
+
+        if (tempTitle.includes(tempSearch)) {
+          tesProd.push(item);
+        }
+        return item;
       });
+      tempProducts = tesProd;
     }
     tempProducts = tempProducts.filter((el) => el.price <= price);
 
